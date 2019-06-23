@@ -1,4 +1,4 @@
-Gets rid of most of the annoying useless prompts on toledo.
+Gets rid of most of the annoying useless prompts on toledo.  
 Install at your own risk. :]
 
 requires tampermonkey(chrome) or greasemonkey(firefox).
