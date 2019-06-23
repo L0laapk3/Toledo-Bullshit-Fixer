@@ -1,13 +1,14 @@
 // ==UserScript==
 // @name         Toledo Bullshit Fixer
-// @namespace    http://tampermonkey.net/
-// @version      1.0
+// @namespace    https://github.com/L0laapk3/Toledo-Bullshit-Fixer
+// @version      1.1
 // @description  Get rid of most of the annoying useless prompts on toledo.
 // @author       L0laapk3
 // @match        *://p.cygnus.cc.kuleuven.be/webapps/blackboard/*
 // @match        *://webwsp.aps.kuleuven.be/sap/bc/ui2/flp*
 // @match        *://idp.kuleuven.be/idp/profile/SAML2/POST/SSO*
 // @match        *://idp.kuleuven.be/idp/profile/SAML2/Redirect/SSO*
+// @match        *://webwsp.aps.kuleuven.be/sap(*
 // @updateURL    https://cdn.jsdelivr.net/gh/L0laapk3/Toledo-Bullshit-Fixer/toledo.user.js
 // @downloadURL  https://cdn.jsdelivr.net/gh/L0laapk3/Toledo-Bullshit-Fixer/toledo.user.js
 // @grant        none
@@ -22,6 +23,15 @@
              localStorage.lastRefresh = new Date().getTime();
              document.location.reload();
          }
+    }
+
+    // isp 'fix' for back button
+    if (document.location.href.includes("webwsp.aps.kuleuven.be/sap(")) {
+
+        window.location.hash = "#" + new Date().getTime();
+        setTimeout(window.addEventListener, 1, "hashchange", function(){
+            [...document.getElementsByTagName("a")].find(a => /tellSimple2\((?:\s*'[^']*'\s*,){3}\s*'BACK'(?:\s*,\s*'([^']*)')*\s*\)/gmi.test(a.href)).click();
+        });
     }
 
 
