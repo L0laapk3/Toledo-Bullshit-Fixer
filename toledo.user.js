@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Toledo Bullshit Fixer
 // @namespace    https://github.com/L0laapk3/Toledo-Bullshit-Fixer
-// @version      1.1
+// @version      1.2
 // @description  Get rid of most of the annoying useless prompts on toledo.
 // @author       L0laapk3
 // @match        *://p.cygnus.cc.kuleuven.be/webapps/blackboard/*
@@ -26,8 +26,8 @@
     }
 
     // isp 'fix' for back button
-    if (document.location.href.includes("webwsp.aps.kuleuven.be/sap(")) {
-
+    if (document.location.href.includes("webwsp.aps.kuleuven.be/sap(") && document.location.href.includes("z_indiv_studprg")) {
+        return;
         window.location.hash = "#" + new Date().getTime();
         setTimeout(window.addEventListener, 1, "hashchange", function(){
             [...document.getElementsByTagName("a")].find(a => /tellSimple2\((?:\s*'[^']*'\s*,){3}\s*'BACK'(?:\s*,\s*'([^']*)')*\s*\)/gmi.test(a.href)).click();
